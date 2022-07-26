@@ -2,6 +2,7 @@ package com.example.admin.augscan;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -98,6 +99,7 @@ public class viewInventoryActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    fetchData(dataSnapshot);
                     counttotalnoofitem = (int) dataSnapshot.getChildrenCount();
                     totalnoofitem.setText(Integer.toString(counttotalnoofitem));
                 } else {
@@ -119,10 +121,10 @@ public class viewInventoryActivity extends AppCompatActivity {
         super.onStart();
         processDialog.setMessage("................Please Wait.............");
         processDialog.show();
-        FirebaseRecyclerAdapter<Items, scanItemsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, scanItemsActivity.UsersViewHolder>
-                (Items.class, R.layout.list_layout, scanItemsActivity.UsersViewHolder.class, mdatabaseReference) {
+        FirebaseRecyclerAdapter<Items, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, UsersViewHolder>
+                (Items.class, R.layout.list_layout, UsersViewHolder.class, mdatabaseReference) {
             @Override
-            protected void populateViewHolder(scanItemsActivity.UsersViewHolder viewHolder, Items model, int position) {
+            protected void populateViewHolder(UsersViewHolder viewHolder, Items model, int position) {
                 viewHolder.setDetails(
                         getApplicationContext(),
                         model.getItemBarcode(),
@@ -142,8 +144,6 @@ public class viewInventoryActivity extends AppCompatActivity {
                         model.getItemYear(),
                         model.getItemOrigin(),
                         model.getItemStatus());
-                // testList.clear();
-                testList.add(model);
                 processDialog.dismiss();
             }
         };
@@ -163,6 +163,60 @@ public class viewInventoryActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Download Success", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, "Download Success. File in \\Download\\" + ExcelExporter.getFileName(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public static class UsersViewHolder extends RecyclerView.ViewHolder {
+        View mView;
+        public UsersViewHolder(View itemView) {
+            super(itemView);
+            mView = itemView;
+        }
+        private final Items itemList = new Items();
+        public void setDetails(
+                Context ctx,
+                final String itemBarcode,
+                String itemCategory,
+                String itemName,
+                String itemPrice,
+                String itemImg,
+                String itemYear,
+                String itemOrigin,
+                String itemStatus
+        ) {
+            TextView item_barcode = (TextView) mView.findViewById(R.id.viewitembarcode);
+            TextView item_name = (TextView) mView.findViewById(R.id.viewitemname);
+            TextView item_category = (TextView) mView.findViewById(R.id.viewitemcategory);
+            TextView item_price = (TextView) mView.findViewById(R.id.viewitemprice);
+            TextView item_year = (TextView) mView.findViewById(R.id.viewItemYear);
+            TextView item_origin = (TextView) mView.findViewById(R.id.viewItemOrigin);
+            TextView item_status = (TextView) mView.findViewById(R.id.viewItemStatus);
+            item_barcode.setText(itemBarcode);
+            item_category.setText(itemCategory);
+            item_name.setText(itemName);
+            item_price.setText(itemPrice);
+            item_year.setText(itemYear);
+            item_origin.setText(itemOrigin);
+            item_status.setText(itemStatus);
+            this.itemList.setItem(
+                    itemName,
+                    itemCategory,
+                    itemPrice,
+                    itemBarcode,
+                    itemImg,
+                    itemYear,
+                    itemOrigin,
+                    itemStatus
+            );
+        }
+    }
+
+    private void fetchData(DataSnapshot dataSnapshot)
+    {
+        for(DataSnapshot postSnapShot:dataSnapshot.getChildren())
+        {
+            Items item = postSnapShot.getValue(Items.class);
+            testList.add(item);
         }
     }
 }
