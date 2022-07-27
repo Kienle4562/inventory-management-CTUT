@@ -37,15 +37,14 @@ public class ExcelExporter {
             itemList.addCell(new Label(4, 0, "Year"));
             itemList.addCell(new Label(5, 0, "Origin"));
             itemList.addCell(new Label(6, 0, "Status"));
-
-            for (int num = 1; num < model.size(); num++) {
-                itemList.addCell(new Label(0, num, model.get(num).getItemBarcode()));
-                itemList.addCell(new Label(1, num, model.get(num).getItemName()));
-                itemList.addCell(new Label(2, num, model.get(num).getItemPrice()));
-                itemList.addCell(new Label(3, num, model.get(num).getItemCategory()));
-                itemList.addCell(new Label(4, num, model.get(num).getItemYear()));
-                itemList.addCell(new Label(5, num, model.get(num).getItemOrigin()));
-                itemList.addCell(new Label(6, num, model.get(num).getItemStatus()));
+            for (int num = 1; num <= model.size(); num++) {
+                itemList.addCell(new Label(0, num, model.get(num-1).getItemBarcode()));
+                itemList.addCell(new Label(1, num, model.get(num-1).getItemName()));
+                itemList.addCell(new Label(2, num, model.get(num-1).getItemPrice()));
+                itemList.addCell(new Label(3, num, model.get(num-1).getItemCategory()));
+                itemList.addCell(new Label(4, num, model.get(num-1).getItemYear()));
+                itemList.addCell(new Label(5, num, model.get(num-1).getItemOrigin()));
+                itemList.addCell(new Label(6, num, model.get(num-1).getItemStatus()));
             }
             workbook.write();
             workbook.close();

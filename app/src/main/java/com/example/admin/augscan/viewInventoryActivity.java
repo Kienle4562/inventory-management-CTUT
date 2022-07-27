@@ -239,6 +239,7 @@ public class viewInventoryActivity extends AppCompatActivity {
 
     private void fetchData(DataSnapshot dataSnapshot)
     {
+        testList.clear(); // TODO khoi tao mang rong
         for(DataSnapshot postSnapShot:dataSnapshot.getChildren())
         {
             Items item = postSnapShot.getValue(Items.class);
