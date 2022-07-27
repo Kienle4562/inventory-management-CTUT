@@ -208,6 +208,32 @@ public class viewInventoryActivity extends AppCompatActivity {
                     itemOrigin,
                     itemStatus
             );
+            Button editItem = mView.findViewById(R.id.buttonedit);
+            editItem.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                        Intent i;
+                        i = new Intent(mView.getContext(), edititemActivity.class);
+                        i.putExtra("itemBarcode", itemList.getItemBarcode());
+                        i.putExtra("itemName", itemList.getItemName());
+                        i.putExtra("itemCategory", itemList.getItemCategory());
+                        i.putExtra("itemPrice", itemList.getItemPrice());
+                        i.putExtra("itemYear", itemList.getItemYear());
+                        i.putExtra("itemOrigin", itemList.getItemOrigin());
+                        i.putExtra("itemStatus", itemList.getItemStatus());
+                        view.getContext().startActivity(i);
+                  }
+            });
+            Button btnView = mView.findViewById(R.id.buttonView);
+                 btnView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                       Intent i;
+                       i = new Intent(mView.getContext(), ViewImagePopUp.class);
+                       i.putExtra("itemBarcode", itemList.getItemBarcode());
+                       view.getContext().startActivity(i);
+                 }
+            });
         }
     }
 
