@@ -66,28 +66,28 @@ public class scanItemsActivity extends AppCompatActivity {
 
     public void firebaseSearch(String searchText) {
         Query firebaseSearchQuery = mdatabaseReference.orderByChild("itemBarcode").startAt(searchText).endAt(searchText + "\uf8ff");
-        if (!TextUtils.isEmpty(searchText)) {
-            FirebaseRecyclerAdapter<Items, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, UsersViewHolder>(Items.class, R.layout.list_layout, UsersViewHolder.class, firebaseSearchQuery) {
-                @Override
-                protected void populateViewHolder(UsersViewHolder viewHolder, Items model, int position) {
-                    viewHolder.setDetails(
-                            getApplicationContext(),
-                            model.getItemBarcode(),
-                            model.getItemCategory(),
-                            model.getItemName(),
-                            model.getItemPrice(),
-                            model.getItemImg(),
-                            model.getItemYear(),
-                            model.getItemOrigin(),
-                            model.getItemStatus()
-                    );
-                }
-            };
-            mrecyclerview.setAdapter(firebaseRecyclerAdapter);
-            Toast.makeText(scanItemsActivity.this, "Wait a minute", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(scanItemsActivity.this, "Please scan Barcode", Toast.LENGTH_SHORT).show();
-        }
+//        if (!TextUtils.isEmpty(searchText)) {
+//            FirebaseRecyclerAdapter<Items, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, UsersViewHolder>(Items.class, R.layout.list_layout, UsersViewHolder.class, firebaseSearchQuery) {
+//                @Override
+//                protected void populateViewHolder(UsersViewHolder viewHolder, Items model, int position) {
+//                    viewHolder.setDetails(
+//                            getApplicationContext(),
+//                            model.getItemBarcode(),
+//                            model.getItemCategory(),
+//                            model.getItemName(),
+//                            model.getItemPrice(),
+//                            model.getItemImg(),
+//                            model.getItemYear(),
+//                            model.getItemOrigin(),
+//                            model.getItemStatus()
+//                    );
+//                }
+//            };
+//            mrecyclerview.setAdapter(firebaseRecyclerAdapter);
+//            Toast.makeText(scanItemsActivity.this, "Wait a minute", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(scanItemsActivity.this, "Please scan Barcode", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {

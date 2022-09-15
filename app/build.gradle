@@ -48,5 +48,21 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:10.0.1'
     compile group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6'
 
+    //RecyclerView
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    //Firebase Database
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+
+    //Firebase-UI Library
+    implementation 'com.firebaseui:firebase-ui-database:4.3.1'
+
+    //Android Paging Libray
+    implementation "android.arch.paging:runtime:1.0.1"
+
+    //Firebase Pagination Library
+    implementation 'com.shreyaspatil:FirebaseRecyclerPagination:1.0.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

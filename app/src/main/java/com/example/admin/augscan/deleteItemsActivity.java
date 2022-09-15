@@ -66,28 +66,28 @@ public class deleteItemsActivity extends AppCompatActivity {
         String resultEmail = finalUser.replace(".", "");
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(resultEmail).child("Items");
         Query firebaseSearchQuery = databaseReference.orderByChild("itemCategory").startAt(searchText).endAt(searchText + "\uf8ff");
-        if (!TextUtils.isEmpty(searchText)) {
-            FirebaseRecyclerAdapter<Items, deleteItemsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, deleteItemsActivity.UsersViewHolder>(Items.class, R.layout.list_item_delete_layout, deleteItemsActivity.UsersViewHolder.class, firebaseSearchQuery) {
-                @Override
-                protected void populateViewHolder(deleteItemsActivity.UsersViewHolder viewHolder, Items model, int position) {
-                    viewHolder.setDetails(
-                            getApplicationContext(),
-                            model.getItemBarcode(),
-                            model.getItemCategory(),
-                            model.getItemName(),
-                            model.getItemPrice(),
-                            model.getItemImg(),
-                            model.getItemYear(),
-                            model.getItemOrigin(),
-                            model.getItemStatus()
-                    );
-                }
-            };
-            mrecyclerview.setAdapter(firebaseRecyclerAdapter);
-            Toast.makeText(deleteItemsActivity.this, "Wait a minute", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(deleteItemsActivity.this, "Please scan Barcode", Toast.LENGTH_SHORT).show();
-        }
+//        if (!TextUtils.isEmpty(searchText)) {
+//            FirebaseRecyclerAdapter<Items, deleteItemsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Items, deleteItemsActivity.UsersViewHolder>(Items.class, R.layout.list_item_delete_layout, deleteItemsActivity.UsersViewHolder.class, firebaseSearchQuery) {
+//                @Override
+//                protected void populateViewHolder(deleteItemsActivity.UsersViewHolder viewHolder, Items model, int position) {
+//                    viewHolder.setDetails(
+//                            getApplicationContext(),
+//                            model.getItemBarcode(),
+//                            model.getItemCategory(),
+//                            model.getItemName(),
+//                            model.getItemPrice(),
+//                            model.getItemImg(),
+//                            model.getItemYear(),
+//                            model.getItemOrigin(),
+//                            model.getItemStatus()
+//                    );
+//                }
+//            };
+//            mrecyclerview.setAdapter(firebaseRecyclerAdapter);
+//            Toast.makeText(deleteItemsActivity.this, "Wait a minute", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(deleteItemsActivity.this, "Please scan Barcode", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
